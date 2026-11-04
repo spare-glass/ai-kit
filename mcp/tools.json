@@ -1,0 +1,25 @@
+{
+  "server": "spare-workshop",
+  "note": "开发者 MCP 的工具接口。服务地址每个开发者不同、等同密码，在 https://spare.cool/dev/ 获取，不要写进任何仓库。",
+  "tools": [
+    { "name": "whoami", "description": "开发者身份、已建应用、配额", "params": {} },
+    { "name": "create_app", "description": "新建应用：分配 dev.<handle>.<slug>，建私有 git 仓库，返回带 30 天 token 的地址",
+      "params": { "name": "string，必填，≤ 23 字节", "slug": "[a-z0-9-]", "category": "tools / games / faces / reading / health / ai", "tagline": "string" } },
+    { "name": "get_git_remote", "description": "token 过期后重新拿 git 地址", "params": { "app": "应用 id 或 slug" } },
+    { "name": "push_files", "description": "没有 git 时直接提交文件到 main（触发云端构建）", "params": { "app": "string", "files": "{路径: 完整内容}", "delete": "[路径]", "message": "string" } },
+    { "name": "build", "description": "云端构建：编译 + 清单检查 + 字节码验证 + 场景和压力场景（0 FAULT 才通过）+ 签名", "params": { "app": "string", "ref": "分支或 commit，默认 main" } },
+    { "name": "simulate", "description": "在模拟器里跑场景，返回 1080×440 截图和 FAULT 日志", "params": { "app": "string", "ref": "string", "scenario": "场景全文或文件路径" } },
+    { "name": "install_on_my_glasses", "description": "把开发版放进用户 App 的开发版列表，让用户在真眼镜上安装", "params": { "app": "string" } },
+    { "name": "submit_for_review", "description": "提交上架审核", "params": { "app": "string", "version_name": "semver", "notes": "string" } },
+    { "name": "get_review_status", "description": "审核状态", "params": { "app": "string" } },
+    { "name": "get_review_feedback", "description": "审核意见", "params": { "app": "string" } },
+    { "name": "list_releases", "description": "渠道和构建历史", "params": { "app": "string" } },
+    { "name": "promote", "description": "晋升渠道 dev → beta → stable", "params": { "app": "string" } },
+    { "name": "rollback", "description": "回滚到审核通过过的构建", "params": { "app": "string" } },
+    { "name": "unpublish_app", "description": "自己下架（已安装的不删）", "params": { "app": "string" } },
+    { "name": "relist_app", "description": "原样重新上架（不重审）", "params": { "app": "string" } },
+    { "name": "app_backend", "description": "托管后端地址、权限和请求示例、用量", "params": { "app": "string" } },
+    { "name": "publish_page", "description": "把仓库 web/ 发布成 https://apps.spare.cool/<id>/", "params": { "app": "string" } },
+    { "name": "set_app_data", "description": "写只读应用数据 kv/<键>", "params": { "app": "string", "key": "string", "value": "JSON" } }
+  ]
+}

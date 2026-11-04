@@ -1,0 +1,12 @@
+{"id": 1, "prompt": "做一个计数器：转表冠加减，单击清零，关掉再打开数字还在。", "scenario": "open\ncrown +1\ncrown +1\nclose\nopen\nshot s", "checks": ["截图里有数字 2"]}
+{"id": 2, "prompt": "做一个 3 分钟倒计时，单击开始和暂停，结束时显示「时间到」。", "scenario": "open\nclick\ntick 181000\nshot s", "checks": ["截图里有「时间到」"]}
+{"id": 3, "prompt": "做一个秒表，显示到十分之一秒，单击开始和暂停。", "scenario": "open\nclick\ntick 2500\nclick\nshot s", "checks": ["截图里有 00:02.5"]}
+{"id": 4, "prompt": "做一个喝水记录：单击记一杯，显示 已喝/目标，目标默认 8，用表冠调。", "scenario": "open\nclick\nclick\nshot s", "checks": ["截图里有 2/8"]}
+{"id": 5, "prompt": "做一个掷骰子：单击掷出 1 到 6。", "scenario": "open\nclick\ntick 500\nshot s", "checks": ["截图里有 1–6 之间的一个数字"]}
+{"id": 6, "prompt": "做一个股票价格看板：从 https://api.example.com/q?s=AAPL 读 JSON 里的 price 字段并显示，离线时显示上次价格。（fields 里把数据键命名为 px）", "scenario": "open\nreply px=189\nshot a\nreply _err=net\nshot b", "checks": ["permissions 含 network:api.example.com", "截图 a 和 b 都有 189"]}
+{"id": 7, "prompt": "做一个显示当前时间（时:分）和当地天气温度的应用。", "scenario": "clock 754\nopen\nreply temp=18 text=晴 icon=sun\nshot s", "checks": ["截图里有 12:34", "截图里有 18"]}
+{"id": 8, "prompt": "做一个专注计时，在手机控制面板上用滑块设置时长（5–60 分钟，默认 25）。（控件 id 用 minutes）", "scenario": "open\ncontrol minutes 10\nshot s", "checks": ["app.json 有 slider 控件", "截图里有 10:00"]}
+{"id": 9, "prompt": "做一个番茄钟：25 分钟专注、5 分钟休息自动交替，显示今天完成了几个。", "scenario": "open\nclick\ntick 1500500\nshot s", "checks": ["截图里有「休息」", "截图里有 1"]}
+{"id": 10, "prompt": "做一个方块呼吸引导：吸气、屏息、呼气、屏息各 4 秒，用进度条显示，不要闪烁。", "scenario": "open\nclick\ntick 2000\nshot a\ntick 4000\nshot b", "checks": ["截图 a 有「吸气」", "截图 b 有「屏息」"]}
+{"id": 11, "prompt": "做一个设置页在手机网页上的应用：眼镜显示 8 位配对码，网页保存的标题显示在眼镜上。（中转 JSON 用 title 和 rev 字段，fields 里的数据键命名为 ttl 和 rev）", "scenario": "open\nreply ttl=读书 rev=1\nshot s", "checks": ["permissions 含 network:apps.spare.cool", "截图里有「读书」", "截图里有配对码"]}
+{"id": 12, "prompt": "做一个单词卡：转表冠切换 5 个英文单词，单击显示中文释义。", "scenario": "open\ncrown +1\nclick\nshot s", "checks": ["截图里同时有英文单词和中文释义"]}
